@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://lmodel.github.io/uco-configuration/Configuration/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.4.2, mkdocs-material-9.0.14" name="generator"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.3" name="generator"/>
 <title>Class: Configuration - uco-configuration</title>
-<link href="../assets/stylesheets/main.113286f1.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.c4a75a56.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -27,7 +27,7 @@
 </div>
 <div data-md-component="announce">
 </div>
-<header class="md-header" data-md-component="header">
+<header class="md-header md-header--shadow" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
 <a aria-label="uco-configuration" class="md-header__button md-logo" data-md-component="logo" href=".." title="uco-configuration">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
@@ -209,18 +209,57 @@
       UcoObject &lt;|-- Configuration
 
       Configuration : configurationEntry
+
+          Configuration ..&gt; ConfigurationEntry : configurationEntry
+
       Configuration : createdBy
+
+          Configuration ..&gt; string : createdBy
+
       Configuration : dependencies
+
+          Configuration ..&gt; Dependency : dependencies
+
       Configuration : description
+
+          Configuration ..&gt; string : description
+
       Configuration : externalReference
+
+          Configuration ..&gt; string : externalReference
+
       Configuration : hasFacet
+
+          Configuration ..&gt; string : hasFacet
+
       Configuration : modifiedTime
+
+          Configuration ..&gt; datetime : modifiedTime
+
       Configuration : name
+
+          Configuration ..&gt; string : name
+
       Configuration : objectCreatedTime
+
+          Configuration ..&gt; datetime : objectCreatedTime
+
       Configuration : objectMarking
+
+          Configuration ..&gt; MarkingDefinitionAbstraction : objectMarking
+
       Configuration : specVersion
+
+          Configuration ..&gt; string : specVersion
+
       Configuration : tag
+
+          Configuration ..&gt; string : tag
+
       Configuration : usageContextAssumptions
+
+          Configuration ..&gt; string : usageContextAssumptions
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -399,18 +438,15 @@ slot_usage:
     multivalued: true
     domain_of:
     - Configuration
-    - Configuration
   dependencies:
     name: dependencies
     multivalued: true
     domain_of:
     - Configuration
-    - Configuration
   usageContextAssumptions:
     name: usageContextAssumptions
     multivalued: true
     domain_of:
-    - Configuration
     - Configuration
 
 </code></pre>
@@ -440,18 +476,15 @@ slot_usage:
     multivalued: true
     domain_of:
     - Configuration
-    - Configuration
   dependencies:
     name: dependencies
     multivalued: true
     domain_of:
     - Configuration
-    - Configuration
   usageContextAssumptions:
     name: usageContextAssumptions
     multivalued: true
     domain_of:
-    - Configuration
     - Configuration
 attributes:
   configurationEntry:
@@ -493,7 +526,6 @@ attributes:
     name: createdBy
     description: The identity that created a characterization of a concept.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     domain: IdentityAbstraction
     alias: createdBy
     owner: Configuration
@@ -505,7 +537,6 @@ attributes:
     name: description
     description: A description of a particular concept characterization.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     multivalued: true
     alias: description
     owner: Configuration
@@ -516,7 +547,6 @@ attributes:
     name: externalReference
     description: Specifies a reference to a resource outside of the UCO.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     domain: ExternalReference
     multivalued: true
     alias: externalReference
@@ -532,7 +562,6 @@ attributes:
       particular context of the class and of the particular instance of the concept
       being characterized.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     domain: Facet
     multivalued: true
     alias: hasFacet
@@ -550,7 +579,6 @@ attributes:
       new version of an object. The modified timestamp MUST be precise to the nearest
       millisecond (exactly three digits after the decimal place in seconds).
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     multivalued: true
     alias: modifiedTime
     owner: Configuration
@@ -561,7 +589,6 @@ attributes:
     name: name
     description: The name of a particular concept characterization.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     alias: name
     owner: Configuration
     domain_of:
@@ -573,7 +600,6 @@ attributes:
     description: Marking definitions to be applied to a particular concept characterization
       in its entirety.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     multivalued: true
     alias: objectMarking
     owner: Configuration
@@ -586,7 +612,6 @@ attributes:
       time pertains to the time of creating the record object, and is not an intrinsic
       characteristic of the concept.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     alias: objectCreatedTime
     owner: Configuration
     domain_of:
@@ -598,7 +623,6 @@ attributes:
     description: The version of UCO ontology or subontology specification used to
       characterize a concept.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     alias: specVersion
     owner: Configuration
     domain_of:
@@ -609,7 +633,6 @@ attributes:
     name: tag
     description: A generic tag/label.
     from_schema: https://w3id.org/lmodel/uco-core
-    rank: 1000
     multivalued: true
     alias: tag
     owner: Configuration
@@ -643,6 +666,6 @@ attributes:
 <div class="md-dialog__inner md-typeset"></div>
 </div>
 <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-<script src="../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+<script src="../assets/javascripts/bundle.efa0ade1.min.js"></script>
 <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script><script>mermaid.initialize({});</script></body>
 </html>
