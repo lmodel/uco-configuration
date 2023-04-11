@@ -1,0 +1,233 @@
+---
+id: https://w3id.org/lmodel/uco-configuration
+name: uco-configuration
+title: UCO Configuration
+description: >-
+  This ontology defines classes and properties for characterizing configurations.
+see_also: https://github.com/ucoProject/UCO/issues/432
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+version: 1.1.0  # sync with primary git repo release tag
+
+## ------------
+##
+## PREFIXES
+## ------------
+# CURIE namespaces (prefixes/base URI's) mappings of prefixes used in the body of
+# the UCOLink Model specification are resolved using a specific precedence order,
+# for use in the generation of the UCOLink Model context.jsonld mappings to
+# namespaces. Any prefixes encountered in the UCOLink Model but not resolved by
+# the following precedence sources, are anonymously declared by linkml as
+# http://example.org/UNKNOWN/ rooted base URI's which should ideally be repaired
+# in one of the precedence lists.
+#
+# 1. The following 'prefixes:' delimited list has first precedence in resolution.
+
+prefixes:
+  lm_core: 'https://w3id.org/lmodel/core/'
+  edam.data: 'http://edamontology.org/data_'
+  linkml: 'https://w3id.org/linkml/'
+  SIO: 'http://identifiers.org/sio/'   # Semanticscience Integrated Ontology
+  sumo: 'https://w3id.org/sumo/kb/'
+
+  configuration: 'https://w3id.org/lmodel/uco-configuration/'
+  schema_uco_core: 'https://w3id.org/lmodel/uco-core/schema/'
+
+default_prefix: configuration
+default_range: string
+
+## ------------
+## ENUMS
+## ------------
+enums: {}
+
+## ------------
+## SUBSETS
+## ------------
+subsets: {}
+
+## ------------
+## TYPES
+## ------------
+imports:
+  - linkml:types
+  - schema_uco_core:uco_core
+
+types: {}
+
+## ------------
+## SLOTS
+## ------------
+slots:
+
+  configurationEntry:
+    description: >-
+       A single configuration setting entry item for a tool or other software.
+    range: ConfigurationEntry
+    see_also: https://github.com/ucoProject/UCO/issues/432
+
+  dependencies:
+    description: >-
+       The relevant configuration dependencies for a tool, application, software, or other cyber object.
+    range: Dependency
+
+  dependencyDescription:
+    description: >-
+       A description of a tool or other software dependency.
+
+  dependencyType:
+    description: >-
+       The type of a tool or other software dependency.
+    exact_mappings:
+      - sumo:dependencyType
+
+  isConfigurationOf:
+    description: >-
+       The object which has been configured to run in a more specified manner than another object.  This property is expected to have a more specific range when associated with a class, such as a configured Tool having this property have a range of a Tool.
+    irreflexive: true
+    range: UcoObject
+    annotations:
+      owl: IrreflexiveProperty
+
+  itemDescription:
+    description: >-
+       A description of a configuration setting entry item.
+    broad_mappings:
+      - lm_core:Description
+      - NCIT:C25365  # description
+      - SIO:000136  # description
+      - wikidata:Q3024326  # description, metadata
+
+  itemName:
+    description: >-
+       The name of a configuration setting entry item.
+    related_mappings:
+      - NCIT:C95653  # entity name data type
+    broad_mappings:
+      - lm_core:Name
+      - NCIT:C42614
+      - SIO:000116
+      - sumo:Name
+      - wikidata:Q82799  # name
+    exact_mappings:
+      - edam.data:2099
+
+  itemObject:
+    description: >-
+       The structured value of a configuration setting entry instance.
+    range: UcoObject
+    see_also: https://github.com/ucoProject/UCO/issues/432>
+
+  itemType:
+    description: >-
+       The type of a configuration setting entry item.
+    broad_mappings:
+      - NCIT:C95653  # entity name data type
+    close_mappings:
+      - lm_core:Category
+    exact_mappings:
+      - lm_core:ComponentType
+
+  itemValue:
+    description: >-
+       The value of a configuration setting entry instance.
+
+  usageContextAssumptions:
+    description: >-
+       Description of the various relevant usage context assumptions for a tool or other software .
+
+  usesConfiguration:
+    description: >-
+       A configuration used by an object.
+    range: Configuration
+
+## ------------
+## CLASSES
+## ------------
+classes:
+
+  Configuration:
+    is_a: UcoObject
+    description: >-
+       A configuration is a grouping of characteristics unique to a set of parameters or initial settings for the use of a tool, application, software, or other cyber object.
+    see_also: https://github.com/ucoProject/UCO/issues/432>
+    slots:
+      - configurationEntry
+      - dependencies
+      - usageContextAssumptions
+    slot_usage:
+      configurationEntry:
+        multivalued: true
+      dependencies:
+        multivalued: true
+      usageContextAssumptions:
+        multivalued: true
+    related_mappings:
+      - sumo:ShapeAttribute
+    close_mappings:
+      - wikidata:Q1781447  # computer configuration
+    exact_mappings:
+      - wikidata:Q7663702  # system configuration
+    narrow_mappings:
+      - wikidata:Q18357227  # settings
+
+  ConfigurationEntry:
+    is_a: UcoInherentCharacterizationThing
+    description: >-
+       A configuration entry is a grouping of characteristics unique to a particular parameter or initial setting for the use of a tool, application, software, or other cyber object.
+    slot_usage:
+      itemDescription:
+        maximum_cardinality: 1
+      itemName:
+        maximum_cardinality: 1
+      itemObject:
+        multivalued: true
+      itemType:
+        maximum_cardinality: 1
+      itemValue:
+        multivalued: true
+    slots:
+      - itemObject
+      - itemDescription
+      - itemName
+      - itemType
+      - itemValue
+    exactly_one_of:
+      - slot_conditions:
+          itemObject:
+            maximum_cardinality: 0
+          iemValue:
+            maximum_cardinality: 0
+      - slot_conditions:
+          itemObject:
+            required: true
+            minimum_cardinality: 1
+          itemValue:
+            required: true
+            minimum_cardinality: 1
+    exact_mappings:
+      - wikidata:Q265913  # configuration item
+      - wikidata:Q105029446  # configuration option
+
+  Dependency:
+    is_a: UcoInherentCharacterizationThing
+    description: >-
+       A dependency is a grouping of characteristics unique to something that a tool or other software relies on to function as intended.
+    comments:
+      - A dependency is a grouping of characteristics unique to something that a tool or other software relies on to function as intended.
+    slots:
+      - dependencyDescription
+      - dependencyType
+    slot_usage:
+      dependencyDescription:
+        maximum_cardinality: 1
+      dependencyType:
+        maximum_cardinality: 1
+    broad_mappings:
+      - wikidata:Q1191527
+    exact_mappings:
+      - sumo:Dependent-TaskRelation
+      - wikidata:Q56859575  # software dependency
+      - wikidata:Q334630  # data dependency
+
+...
